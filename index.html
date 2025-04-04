@@ -3,51 +3,425 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yejun Kang</title>
-    <link rel="stylesheet" href="styles.css">
+    <title>Yejun Kang.</title>
+    <style>
+        :root {
+            --bg-primary: #121212;
+            --bg-secondary: #1e1e1e;
+            --text-primary: #ffffff;
+            --text-secondary: #b3b3b3;
+            --accent: #8a7cff; /* Changed from green to blueish purple */
+            --transition: all 0.3s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 10%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(18, 18, 18, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+        }
+        
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+        
+        .logo span {
+            color: var(--accent);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: var(--transition);
+        }
+        
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+        
+        .menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+        
+        .hero {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 0 10%;
+        }
+        
+        .hero-content {
+            max-width: 600px;
+        }
+        
+        .small-heading {
+            color: var(--accent);
+            font-size: 1rem;
+            font-weight: 400;
+            margin-bottom: 1rem;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+        
+        .hero h2 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 500px;
+            margin-bottom: 2rem;
+        }
+        
+        .cta-btn {
+            display: inline-block;
+            padding: 0.8rem 1.6rem;
+            background-color: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        .cta-btn:hover {
+            background-color: rgba(138, 124, 255, 0.1); /* Changed to match new accent color */
+            transform: translateY(-3px);
+        }
+        
+        section {
+            padding: 6rem 10%;
+        }
+        
+        .section-title {
+            font-size: 2rem;
+            margin-bottom: 3rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title::after {
+            content: "";
+            display: block;
+            height: 1px;
+            width: 300px;
+            background-color: var(--text-secondary);
+            opacity: 0.3;
+            margin-left: 1rem;
+        }
+        
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .skill-badge {
+            background-color: var(--bg-secondary);
+            color: var(--accent);
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+        
+        .project-card {
+            background-color: var(--bg-secondary);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: var(--transition);
+            cursor: pointer;
+        }
+        
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .project-content {
+            padding: 1.5rem;
+        }
+        
+        .project-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .project-title a {
+            color: var(--text-primary);
+            text-decoration: none;
+        }
+        
+        .project-links {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .project-links a {
+            color: var(--text-secondary);
+            transition: var(--transition);
+        }
+        
+        .project-links a:hover {
+            color: var(--accent);
+        }
+        
+        .project-description {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+        
+        .contact {
+            text-align: left;
+            max-width: 600px;
+            margin: 0 auto 0 0;
+        }
+        
+        .contact p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: flex-start;
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+        
+        .social-links a {
+            color: var(--text-secondary);
+            font-size: 1.5rem;
+            transition: var(--transition);
+        }
+        
+        .social-links a:hover {
+            color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        footer {
+            padding: 2rem;
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.8rem;
+        }
+        
+        @media (max-width: 768px) {
+            nav {
+                padding: 1.5rem 5%;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                width: 70%;
+                height: 100vh;
+                background-color: var(--bg-secondary);
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: var(--transition);
+            }
+            
+            .nav-links.active {
+                right: 0;
+            }
+            
+            .menu-btn {
+                display: block;
+            }
+            
+            section {
+                padding: 4rem 5%;
+            }
+            
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero h2 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title::after {
+                width: 100px;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>Yejun Kang</h1>
-            <p>Prospective CS Major</p>
-        </header>
-
-        <section class="about">
-            <h2>About Me</h2>
-            <p>Hello! I'm a student heavily interested in Computer Science.</p>
+    <nav>
+        <a href="#" class="logo">YK<span>.</span></a>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <button class="menu-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+    </nav>
+    
+    <section class="hero" id="about">
+        <div class="hero-content">
+            <p class="small-heading">Hi, my name is</p>
+            <h1>Yejun Kang.</h1>
+            <h2>I build things that people want.</h2>
+            <p>I'm a student software developer making beautiful experiences with various technologies.</p>
+            <a href="#contact" class="cta-btn">Get In Touch</a>
+        </div>
+    </section>
+    
+    <section id="skills">
+        <h2 class="section-title">Skills</h2>
+        <div class="skills">
+            <span class="skill-badge">Java</span>
+            <span class="skill-badge">Git/GitHub</span>
+            <span class="skill-badge">React</span>
+            <span class="skill-badge">JavaScript</span>
+            <span class="skill-badge">TypeScript</span>
+            <span class="skill-badge">HTML</span>
+            <span class="skill-badge">TailwindCSS</span>
+            <span class="skill-badge">Python</span>
+        </div>
+    </section>
+    
+    <section id="projects">
+        <h2 class="section-title">Projects</h2>
+        <div class="projects">
+            <article class="project-card" onclick="window.open('https://famabot.com', '_blank')">
+                <div class="project-content">
+                    <header class="project-title">
+                        <span>Fama</span>
+                    </header>
+                    <p class="project-description">
+                        A transformative Discord bot for all your finance needs. Fama provides comprehensive financial tools and insights directly within Discord.
+                    </p>
+                </div>
+            </article>
             
-        </section>
-
-        <section class="details">
-            <h2>Details</h2>
-            <ul>
-                <li><strong>School:</strong> Emerson HS - CO 2026</li>
-                <li><strong>Major of Interest:</strong> Computer Science</li>
-                <li><strong>Hobbies:</strong> Playing the Clarinet, Watching College Football</li>
-            </ul>
-        </section>
-        <section class="projects">
-            <h2>Projects</h2>
-            <ul>
-
-                <a href="https://viewyourmarkdown.netlify.app/">Markdown Viewer</a>
-                <p>Very simple website that lets you input Markdown and see it displayed. Uses HTML/CSS/JS</p>
-                <a href="https://github.com/YejunKang/Fama/">Fama</a>
-                <p>Transformative Finance bot for Discord</p>
-            </ul>
-        </section>
-        <section class="contact">
-            <h2>Contact Me</h2>
-            <p>Email: <a href="mailto:yejunk80@gmail.com">yejunk80@gmail.com</a></p>
-         </section>
-
-        <footer>
-            <p>&copy; 2024 Yejun Kang. All rights reserved.</p>
-        </footer>
-    </div>
-    <div class="badge-base LI-profile-badge" data-locale="en_US" data-size="medium" data-theme="light" data-type="VERTICAL" data-vanity="yejun-kang-2b15a12b2" data-version="v1"><a class="badge-base__link LI-simple-link" href="https://www.linkedin.com/in/yejun-kang-2b15a12b2?trk=profile-badge">Yejun Kang</a></div>
-    <script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
-
+            <article class="project-card" onclick="window.open('https://yejunkang.github.io/', '_blank')">
+                <div class="project-content">
+                    <header class="project-title">
+                        <span>Mindtypal</span>
+                    </header>
+                    <p class="project-description">
+                        The Ultimate Self-Improvement App. Mindtypal helps users track habits, set goals, and improve their daily routines for better productivity and wellbeing.
+                    </p>
+                </div>
+            </article>
+        </div>
+    </section>
+    
+    <section id="contact" class="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        
+        <div class="social-links">
+            <a href="https://www.linkedin.com/in/theyejunkang/" target="_blank" aria-label="LinkedIn">
+                <i class="fab fa-linkedin"></i>
+            </a>
+            <a href="https://github.com/YejunKang" target="_blank" aria-label="GitHub">
+                <i class="fab fa-github"></i>
+            </a>
+            <a href="mailto:yejunk80@gmail.com" aria-label="Email">
+                <i class="fas fa-envelope"></i>
+            </a>
+        </div>
+    </section>
+    
+    <footer>
+        <p>Designed & Built by Yejun Kang © 2025</p>
+    </footer>
+    
+    <script>
+        // Mobile menu toggle
+        const menuBtn = document.querySelector('.menu-btn');
+        const navLinks = document.querySelector('.nav-links');
+        
+        menuBtn.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+        });
+        
+        // Close mobile menu when clicking a link
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
